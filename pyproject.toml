@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "localknowledge-rag"
+version = "0.1.0.dev0"
+description = "Offline-first local document search — G09 offline document retrieval and hardened frozen worker candidate, FTS5 / BM25 and GUI"
+requires-python = ">=3.10"
+dependencies = ["pdfplumber==0.11.9", "python-docx==1.2.0", "pypdfium2==5.8.0", "Pillow==12.3.0"]
+
+[project.optional-dependencies]
+test = ["pypdf==5.9.0", "reportlab==4.4.9", "PyMuPDF==1.26.7"]
+
+[project.scripts]
+localknowledge = "localknowledge.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

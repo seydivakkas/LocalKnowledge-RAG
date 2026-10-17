@@ -1,0 +1,1 @@
+{"status":"INCOMPLETE_TIMEOUT","reason":"100-document load benchmark exceeded the 120-second tool execution limit; no PASS result obtained", "expected_documents":100, "workers":2, "is_acceptance_proof":false}

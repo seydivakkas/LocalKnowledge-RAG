@@ -1,0 +1,57 @@
+name: LocalKnowledge engineering preview — no commercial release
+on:
+  push:
+    branches: [main, 'feature/**', 'g09/**']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  linux-regression:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+      - name: Install regression dependencies
+        run: python -m pip install -e '.[test]'
+      - name: Source and regression tests
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests -v
+  windows-engineering:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+      - name: Install runtime/test/build dependencies
+        run: |
+          python -m pip install -e ".[test]"
+          python -m pip install pyinstaller==6.22.3
+      - name: Test Windows suspended Job and extraction regressions
+        run: python -m unittest discover -s tests -v
+      - name: Build onedir offline candidate
+        run: |
+          python -m PyInstaller --noconfirm --clean --onedir --windowed --name LocalKnowledge --collect-all pypdfium2 --collect-all pdfplumber --collect-all pdfminer launcher.py
+      - name: Verify frozen EXE and both private workers
+        run: python packaging/windows_probe.py dist/LocalKnowledge/LocalKnowledge.exe evidence/windows_portable_probe.json
+      - name: Native manifest and license inventory (HOLD)
+        run: python packaging/release_inventory.py dist/LocalKnowledge evidence/native_file_inventory.json
+      - name: Fail closed if AGPL-only dev packages are bundled
+        shell: pwsh
+        run: |
+          $paths = Get-ChildItem dist/LocalKnowledge -Recurse -File | Where-Object { $_.FullName -match '(?i)(PyMuPDF|fitz)' }
+          if ($paths) { $paths | ForEach-Object { Write-Host $_.FullName }; throw 'Development-only dependency included in EXE' }
+      - name: Upload engineering-only preview evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: G09-Windows-Engineering-HOLD
+          path: |
+            evidence/**
+            dist/LocalKnowledge/**
+          retention-days: 14

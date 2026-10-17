@@ -1,0 +1,134 @@
+{
+  "status": "PASS",
+  "documents": 100,
+  "workers": 2,
+  "import_seconds": 0.618,
+  "worker_seconds": 59.138,
+  "import_samples": [
+    {
+      "documents": 1,
+      "elapsed_seconds": 0.016
+    },
+    {
+      "documents": 10,
+      "elapsed_seconds": 0.06
+    },
+    {
+      "documents": 25,
+      "elapsed_seconds": 0.153
+    },
+    {
+      "documents": 50,
+      "elapsed_seconds": 0.299
+    },
+    {
+      "documents": 75,
+      "elapsed_seconds": 0.458
+    },
+    {
+      "documents": 100,
+      "elapsed_seconds": 0.618
+    }
+  ],
+  "worker_samples": [
+    {
+      "elapsed_seconds": 0.0,
+      "states": {
+        "PENDING": 100
+      }
+    },
+    {
+      "elapsed_seconds": 5.09,
+      "states": {
+        "COMPLETED": 8,
+        "PENDING": 90,
+        "RUNNING": 2
+      }
+    },
+    {
+      "elapsed_seconds": 10.19,
+      "states": {
+        "COMPLETED": 16,
+        "PENDING": 82,
+        "RUNNING": 2
+      }
+    },
+    {
+      "elapsed_seconds": 15.27,
+      "states": {
+        "COMPLETED": 25,
+        "PENDING": 73,
+        "RUNNING": 2
+      }
+    },
+    {
+      "elapsed_seconds": 20.35,
+      "states": {
+        "COMPLETED": 33,
+        "PENDING": 65,
+        "RUNNING": 2
+      }
+    },
+    {
+      "elapsed_seconds": 25.44,
+      "states": {
+        "COMPLETED": 42,
+        "PENDING": 56,
+        "RUNNING": 2
+      }
+    },
+    {
+      "elapsed_seconds": 30.52,
+      "states": {
+        "COMPLETED": 50,
+        "PENDING": 48,
+        "RUNNING": 2
+      }
+    },
+    {
+      "elapsed_seconds": 35.62,
+      "states": {
+        "COMPLETED": 59,
+        "PENDING": 39,
+        "RUNNING": 2
+      }
+    },
+    {
+      "elapsed_seconds": 40.71,
+      "states": {
+        "COMPLETED": 68,
+        "PENDING": 30,
+        "RUNNING": 2
+      }
+    },
+    {
+      "elapsed_seconds": 45.81,
+      "states": {
+        "COMPLETED": 77,
+        "PENDING": 21,
+        "RUNNING": 2
+      }
+    },
+    {
+      "elapsed_seconds": 50.93,
+      "states": {
+        "COMPLETED": 86,
+        "PENDING": 12,
+        "RUNNING": 2
+      }
+    },
+    {
+      "elapsed_seconds": 56.06,
+      "states": {
+        "COMPLETED": 94,
+        "PENDING": 4,
+        "RUNNING": 2
+      }
+    }
+  ],
+  "end_states": {
+    "COMPLETED": 100
+  },
+  "source_changes": 0,
+  "environment": "Linux container; not clean Windows release acceptance"
+}

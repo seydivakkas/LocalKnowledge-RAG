@@ -1,0 +1,329 @@
+{
+  "dataset": "synthetic author-aligned queries; NOT independent real corpus",
+  "metrics": {
+    "recall_at_5": 1.0,
+    "mrr_at_10": 1.0,
+    "citation_correct": 50,
+    "queries": 50,
+    "source_documents": 10,
+    "index_chunks": 50,
+    "extraction_seconds": 7.461,
+    "latency_ms_p50": 1.076,
+    "latency_ms_max": 1.52
+  },
+  "fixture_sha256": [
+    "c1dcdbdb67c6e21ce035f8f6bfb3c6b8c24fb78c6ae599ab6ca88e8df6cb1098",
+    "10914e5355357e7b40ed2307aba5c99d7f90204e0011a91d72fa10081e2e5917",
+    "d639bd102db633a3c315c400695e14ee4ac4b870422362abafab88ef2d0f7bb8",
+    "204936d0864c7b548ad701c752c832d008c9610d924e1f55752b25d4fb02e42e",
+    "b289dda775ebc48de17c011ab51751352dd1fb7ef5024c8c7eaa26bb4eae0e5d",
+    "9259469774858490dd30ab1362e007519835da3113d9d189190567b7afd1b653",
+    "3b1c3ea1bbaf91074f8fb5c696cd90d74dc66eaa0cf56d80afb0f0c3a923c672",
+    "0578647c45dddc6f4b82e9ae8a5310f86024fb201b79e8c3b5dbcb97dd07a4c1",
+    "6dc709582d8cf3cfbccfafc11191917871e29c8a0772b546209d43cc3cbb43a0",
+    "7e182b9b82f223c7dc55c705909771cecd16ad7c3ea0ef541ebfec3d7cc3d715"
+  ],
+  "results": [
+    {
+      "query": "koridor genişliği",
+      "expected_document_id": "489136a8e3154939ae5fc2bac21a7082",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "yangın merdiveni",
+      "expected_document_id": "489136a8e3154939ae5fc2bac21a7082",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "kaçış yönlendirmesi",
+      "expected_document_id": "489136a8e3154939ae5fc2bac21a7082",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "cephe kaplaması",
+      "expected_document_id": "489136a8e3154939ae5fc2bac21a7082",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "statik proje",
+      "expected_document_id": "489136a8e3154939ae5fc2bac21a7082",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "çatı izolasyonu",
+      "expected_document_id": "042091291d4c4c8da94e7a14c2c48829",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "akustik yalıtım",
+      "expected_document_id": "042091291d4c4c8da94e7a14c2c48829",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "sığınak düzenlemesi",
+      "expected_document_id": "042091291d4c4c8da94e7a14c2c48829",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "ısı köprüsü",
+      "expected_document_id": "042091291d4c4c8da94e7a14c2c48829",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "doğal havalandırma",
+      "expected_document_id": "042091291d4c4c8da94e7a14c2c48829",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "sürdürülebilir mimari",
+      "expected_document_id": "8ac6e6f9c0f642529699b8f173b76c35",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "güneş paneli",
+      "expected_document_id": "8ac6e6f9c0f642529699b8f173b76c35",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "yağmur suyu",
+      "expected_document_id": "8ac6e6f9c0f642529699b8f173b76c35",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "peyzaj tasarımı",
+      "expected_document_id": "8ac6e6f9c0f642529699b8f173b76c35",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "zemin etüdü",
+      "expected_document_id": "8ac6e6f9c0f642529699b8f173b76c35",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "taşıyıcı sistem",
+      "expected_document_id": "23218894b0d7413882639f7b4e9373e4",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "beton dayanımı",
+      "expected_document_id": "23218894b0d7413882639f7b4e9373e4",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "çelik konstrüksiyon",
+      "expected_document_id": "23218894b0d7413882639f7b4e9373e4",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "temel donatısı",
+      "expected_document_id": "23218894b0d7413882639f7b4e9373e4",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "mekanik tesisat",
+      "expected_document_id": "23218894b0d7413882639f7b4e9373e4",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "havalandırma kanalı",
+      "expected_document_id": "ee279e58fe3f4e4ca0b979c246124539",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "iklimlendirme kontrolü",
+      "expected_document_id": "ee279e58fe3f4e4ca0b979c246124539",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "aydınlatma armatürü",
+      "expected_document_id": "ee279e58fe3f4e4ca0b979c246124539",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "kablo güzergahı",
+      "expected_document_id": "ee279e58fe3f4e4ca0b979c246124539",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "enerji verimliliği",
+      "expected_document_id": "ee279e58fe3f4e4ca0b979c246124539",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "malzeme metrajı",
+      "expected_document_id": "c5e29b8e95bb47a8a40b3e878d809246",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "birim fiyat",
+      "expected_document_id": "c5e29b8e95bb47a8a40b3e878d809246",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "maliyet analizi",
+      "expected_document_id": "c5e29b8e95bb47a8a40b3e878d809246",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "ihale dokümanı",
+      "expected_document_id": "c5e29b8e95bb47a8a40b3e878d809246",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "teknik şartname",
+      "expected_document_id": "c5e29b8e95bb47a8a40b3e878d809246",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "tasarım revizyonu",
+      "expected_document_id": "8d113641db2548a2bfe5887841915803",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "ruhsat başvurusu",
+      "expected_document_id": "8d113641db2548a2bfe5887841915803",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "yapı denetimi",
+      "expected_document_id": "8d113641db2548a2bfe5887841915803",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "koruma alanı",
+      "expected_document_id": "8d113641db2548a2bfe5887841915803",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "tarihi doku",
+      "expected_document_id": "8d113641db2548a2bfe5887841915803",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "imar sınırı",
+      "expected_document_id": "cd79b7ef96864b11a2ef2eaa3a4385b4",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "bina yüksekliği",
+      "expected_document_id": "cd79b7ef96864b11a2ef2eaa3a4385b4",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "otopark rampası",
+      "expected_document_id": "cd79b7ef96864b11a2ef2eaa3a4385b4",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "engelli erişimi",
+      "expected_document_id": "cd79b7ef96864b11a2ef2eaa3a4385b4",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "asansör kabini",
+      "expected_document_id": "cd79b7ef96864b11a2ef2eaa3a4385b4",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "döşeme kalınlığı",
+      "expected_document_id": "79d1a111fde64185bcd654ed5c9eac92",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "kolon kesiti",
+      "expected_document_id": "79d1a111fde64185bcd654ed5c9eac92",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "kiriş detayı",
+      "expected_document_id": "79d1a111fde64185bcd654ed5c9eac92",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "pencere doğraması",
+      "expected_document_id": "79d1a111fde64185bcd654ed5c9eac92",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "cam geçirgenliği",
+      "expected_document_id": "79d1a111fde64185bcd654ed5c9eac92",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "ısı pompası",
+      "expected_document_id": "fce033e102b54fdc8a4fb4e7d09f0e5d",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "atık yönetimi",
+      "expected_document_id": "fce033e102b54fdc8a4fb4e7d09f0e5d",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "şantiye güvenliği",
+      "expected_document_id": "fce033e102b54fdc8a4fb4e7d09f0e5d",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "yol kotu",
+      "expected_document_id": "fce033e102b54fdc8a4fb4e7d09f0e5d",
+      "rank": 1,
+      "citation_ok": true
+    },
+    {
+      "query": "parsel sınırı",
+      "expected_document_id": "fce033e102b54fdc8a4fb4e7d09f0e5d",
+      "rank": 1,
+      "citation_ok": true
+    }
+  ],
+  "commercial_release": "HOLD"
+}

@@ -1,0 +1,59 @@
+{
+  "imported": {
+    "document_id": "e056e4119598490195fc774ec706fbc4",
+    "kind": "TXT",
+    "operation": "CREATED",
+    "revision": 1,
+    "sha256": "02ce3db9b1e4359888dd6ce4ec43aa25ba40ac1de07571cb13df695c40ef4e42",
+    "warning": ""
+  },
+  "processed": {
+    "processed": true
+  },
+  "search": [
+    {
+      "bm25_score": -8.301886792452831e-07,
+      "char_end": 43,
+      "char_start": 0,
+      "document_id": "e056e4119598490195fc774ec706fbc4",
+      "excerpt": "Mimari koridor ve kaynak doğrulama belgesi.",
+      "kind": "TXT",
+      "name": "sentetik.txt",
+      "rank": 1,
+      "revision": 1,
+      "sha256": "02ce3db9b1e4359888dd6ce4ec43aa25ba40ac1de07571cb13df695c40ef4e42",
+      "unit_kind": "PARAGRAPH",
+      "unit_number": 0,
+      "verified": true
+    }
+  ],
+  "stats": {
+    "indexed_chunks": 2,
+    "indexed_documents": 1,
+    "pending_index": 0,
+    "registered_documents": 1,
+    "stored_versions": 1
+  },
+  "rebuild": {
+    "chunks": 2,
+    "documents": 1
+  },
+  "search_after_rebuild": [
+    {
+      "bm25_score": -8.301886792452831e-07,
+      "char_end": 43,
+      "char_start": 0,
+      "document_id": "e056e4119598490195fc774ec706fbc4",
+      "excerpt": "Mimari koridor ve kaynak doğrulama belgesi.",
+      "kind": "TXT",
+      "name": "sentetik.txt",
+      "rank": 1,
+      "revision": 1,
+      "sha256": "02ce3db9b1e4359888dd6ce4ec43aa25ba40ac1de07571cb13df695c40ef4e42",
+      "unit_kind": "PARAGRAPH",
+      "unit_number": 0,
+      "verified": true
+    }
+  ],
+  "data": "synthetic, no customer data"
+}
