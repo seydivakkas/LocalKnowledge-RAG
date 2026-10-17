@@ -65,16 +65,16 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({'destination':str(value.destination),'documents':value.document_count,
                 'versions':value.version_count,'objects':value.object_count,
                 'total_bytes':value.total_bytes,'source_sha256':value.source_digest,
-                'status':'VERIFIED'},ensure_ascii=False,sort_keys=True))
+                'status':'VERIFIED'},ensure_ascii=True,sort_keys=True))
             return 0
         except (BackupError,OSError) as exc:
-            print(json.dumps({'error':getattr(exc,'code','IO_ERROR'),'message':str(exc)},ensure_ascii=False))
+            print(json.dumps({'error':getattr(exc,'code','IO_ERROR'),'message':str(exc)},ensure_ascii=True))
             return 1
     if args.version:
         print(__version__)
         return 0
     if args.smoke:
-        print(json.dumps({"version": __version__, "phase": "G09", "status": "sqlite-library-extraction-fts5-and-source-viewer", "extraction_ready": True, "fts5_capable": _fts5_capable(), "index_ready": False, "data_connected": False, "commercial_release": "HOLD"}, ensure_ascii=False, sort_keys=True))
+        print(json.dumps({"version": __version__, "phase": "G09", "status": "sqlite-library-extraction-fts5-and-source-viewer", "extraction_ready": True, "fts5_capable": _fts5_capable(), "index_ready": False, "data_connected": False, "commercial_release": "HOLD"}, ensure_ascii=True, sort_keys=True))
         return 0
     if args.import_file or args.list_documents or args.library_stats or args.list_jobs or args.process_next or args.retry_job is not None or args.cancel_job is not None or args.search is not None or args.rebuild_search:
         service = IntakeService(args.data_dir)
@@ -108,12 +108,12 @@ def main(argv: list[str] | None = None) -> int:
             else:
                 s = service.repository.stats()
                 result = {"registered_documents": s.registered_documents,"stored_versions": s.stored_versions,"pending_index": s.pending_index,"indexed_documents": SearchService(service.root).stats()["indexed_documents"],"indexed_chunks": SearchService(service.root).stats()["indexed_chunks"]}
-            print(json.dumps(result,ensure_ascii=False,sort_keys=True))
+            print(json.dumps(result,ensure_ascii=True,sort_keys=True))
             return 0
         except Exception as exc:
             from .ingest.parsers import IntakeError
             if isinstance(exc, (IntakeError, SearchError, OSError, ValueError)):
-                print(json.dumps({"error":getattr(exc,'code','IO_ERROR'),"message":str(exc)},ensure_ascii=False))
+                print(json.dumps({"error":getattr(exc,'code','IO_ERROR'),"message":str(exc)},ensure_ascii=True))
                 return 1
             raise
     from .ui.app import run
