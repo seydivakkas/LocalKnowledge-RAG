@@ -115,7 +115,10 @@ def _windows_suspended_job_worker(command:list[str], *, timeout:float, memory_by
     finally:
         # Closing the job kills every attached descendant before returning.
         if started:
+            # TerminateProcess is asynchronous on Windows. Wait for complete
+            # handle release before temporary directories can be removed.
             k.TerminateProcess(pi.hProcess,1)
+            k.WaitForSingleObject(pi.hProcess,5000)
             k.CloseHandle(pi.hThread)
             k.CloseHandle(pi.hProcess)
         k.CloseHandle(job)
