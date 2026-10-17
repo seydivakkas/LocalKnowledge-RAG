@@ -37,7 +37,7 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Build onedir offline candidate
         run: |
-          python -m PyInstaller --noconfirm --clean --onedir --windowed --name LocalKnowledge --collect-all pypdfium2 --collect-all pdfplumber --collect-all pdfminer launcher.py
+          python -m PyInstaller --noconfirm --clean --onedir --console --name LocalKnowledge --collect-all pypdfium2 --collect-all pdfplumber --collect-all pdfminer launcher.py
       - name: Verify frozen EXE and both private workers
         run: python packaging/windows_probe.py dist/LocalKnowledge/LocalKnowledge.exe evidence/windows_portable_probe.json
       - name: Native manifest and license inventory (HOLD)
