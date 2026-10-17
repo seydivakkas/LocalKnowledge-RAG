@@ -4,6 +4,7 @@ Developer/CI check, NOT end-user Windows acceptance.
 """
 from __future__ import annotations
 import argparse
+from contextlib import closing
 import json
 from pathlib import Path
 import subprocess
@@ -31,7 +32,7 @@ def main():
         # Private PDF worker is executed via same frozen executable.
         digest=imported['sha256'];req=root/'request.json';reply=root/'reply.json';png=root/'page.png'
         import sqlite3
-        with sqlite3.connect(str(db/'library.sqlite3')) as con:
+        with closing(sqlite3.connect(str(db/'library.sqlite3'))) as con:
             unit=con.execute('SELECT original_text FROM extracted_spans WHERE document_id=? AND revision=? ORDER BY unit_number LIMIT 1',(imported['document_id'],imported['revision'])).fetchone()[0]
         quote=hits[0]['excerpt'];start=unit.find(quote)
         assert start>=0
