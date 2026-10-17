@@ -44,7 +44,7 @@ class G04Tests(unittest.TestCase):
         with connect(self.svc.db_path) as conn:
             spans=conn.execute('SELECT * FROM extracted_spans ORDER BY unit_number').fetchall()
             self.assertEqual([s['original_text'] for s in spans],['Merhaba Türkiye','İkinci paragraf'])
-            self.assertEqual([s['char_start'] for s in spans],[0,16])
+            self.assertEqual([s['char_start'] for s in spans],[0,len(p.read_bytes().decode('utf-8').splitlines(keepends=True)[0])])
             self.assertEqual(conn.execute("SELECT count(*) FROM sqlite_master WHERE name='chunks_fts'").fetchone()[0],0)
         self.assertEqual(hashlib.sha256(p.read_bytes()).hexdigest(),original)
         self.assertTrue(self.svc.verify(r.document_id,r.revision))
