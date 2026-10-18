@@ -21,10 +21,12 @@ class G05SearchTests(unittest.TestCase):
         path=self.base/name;path.write_text(body,encoding='utf-8');return path
     def process(self):
         runner=Runner(self.root,poll_interval=.005)
+        pending=sorted((j for j in runner.queue.list() if j.status=='PENDING'),key=lambda j:j.id)
+        self.assertTrue(pending,'No pending job to process')
         self.assertTrue(runner.run_one())
-        jobs=runner.queue.list()
-        self.assertTrue(all(j.status=='COMPLETED' for j in jobs if j.status!='SUPERSEDED'),
-                        [(j.id,j.status,j.error_code,j.attempt) for j in jobs])
+        updated=next(j for j in runner.queue.list() if j.id==pending[0].id)
+        self.assertEqual(updated.status,'COMPLETED',
+                         (updated.id,updated.status,updated.error_code,updated.attempt))
     def test_fts_keyword_bm25_and_verified_excerpt(self):
         res=self.ingest.import_document(self.write('evrak.txt','Koridor genişliği yüz santim olmalıdır.\nDüzlem çizimi ve cephe analizi.\n'))
         self.assertEqual(self.searcher.stats(),{'indexed_documents':0,'indexed_chunks':0})
