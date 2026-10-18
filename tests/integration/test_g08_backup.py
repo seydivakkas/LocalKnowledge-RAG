@@ -26,7 +26,11 @@ class BackupTests(unittest.TestCase):
 
     def _index(self):
         self.assertTrue(Runner(self.root,poll_interval=.01).run_one())
-        self.assertTrue(SearchService(self.root).search('koridor') or SearchService(self.root).search('pencere'))
+        jobs = Runner(self.root).queue.list()
+        self.assertTrue(all(j.status == 'COMPLETED' for j in jobs),
+                        [(j.status,j.error_code,j.attempt,j.processed_units,j.total_units) for j in jobs])
+        self.assertTrue(SearchService(self.root).search('koridor') or SearchService(self.root).search('pencere'),
+                        [(j.status,j.error_code,j.attempt) for j in jobs])
 
     def test_backup_restore_with_rebuilt_search_index(self):
         self._index()
