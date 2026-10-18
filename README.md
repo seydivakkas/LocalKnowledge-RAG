@@ -2,7 +2,7 @@
 
 **Offline-first Windows öncelikli yerel belge kütüphanesi ve kaynaklı arama.** G00–G07 kaynak kodu üzerine G08 yedekleme/kurtarma, izole PDF worker Windows hazırlığı ve bağımsız PDF geometri testleri eklenmiştir.
 
-**Durum:** G09 Linux + Windows otomatik mühendislik CI başarılı ([kanıt](https://github.com/seydivakkas/LocalKnowledge-RAG/actions/runs/39075582047)); gerçek Windows son kullanıcı kabulü, PDFium/native lisans/REDIST ve ticari dağıtım **HOLD**. Önceki G08 regresyonu: 95 test / 94 PASS / 1 Windows-only SKIP.
+**Durum:** G09 Windows ve Linux mühendislik CI'sı [28ae4ed6 için başarılı](https://github.com/seydivakkas/LocalKnowledge-RAG/actions/runs/39091387686). Bu, paketlenmiş EXE için sentetik teknik kontroldür; gerçek Windows 10/11 kullanıcı kabulü, PDFium/native lisans/REDIST ve ticari dağıtım **HOLD**. Önceki G08 referansı: 95 test / 94 PASS / 1 Windows-only SKIP.
 
 ## Çalışan modüller
 
@@ -11,7 +11,7 @@
 - G05 FTS5/BM25, özgün pasaj ve SHA-256 doğrulama
 - G06/G07 PDFium orijinal PDF görüntüsü, temkinli CropBox/rotasyon işaretlemesi
 - **G08 gerçek Yedekleme ekranı:** SQLite snapshot, geçmiş belge SHA nesneleri, hash manifestosu, yedek doğrulama, yeni veri klasörüne restore, arama indeksinin yeniden kurulması
-- G08 Windows `CreateProcessW(CREATE_SUSPENDED) → Job Object → ResumeThread` **kodlandı fakat Windows doğrulanmadı**
+- G08/G09 Windows `CreateProcessW(CREATE_SUSPENDED) → Job Object → ResumeThread` **Windows CI üzerinde sentetik olarak doğrulandı**, bağımsız kullanıcı kabulü yapılmadı
 
 ## Geliştirme ve Linux otomatik test
 
@@ -23,7 +23,7 @@ python -m unittest discover -s tests -v
 python -m localknowledge --gui
 ```
 
-Python/paket indirme geliştirme ortamında gerekebilir; çalıştırılan uygulama çekirdeği bulut API istemez. Kullanıcıya çevrimdışı çalışan portable EXE **henüz üretilmiş kabul edilmez**.
+Python/paket indirme geliştirme ortamında gerekebilir; çalıştırılan uygulama çekirdeği bulut API istemez. Windows CI'da **çevrimdışı çalışacak şekilde tasarlanmış EXE adayı üretildi ve sentetik uçtan uca denendi**; temiz Windows son kullanıcı cihazında kabulü henüz yapılmadı.
 
 ## Yedek CLI
 
@@ -59,7 +59,7 @@ uygulama içi özel worker rotasına yönlendirilir; hiçbir durumda `LocalKnowl
 
 - Windows otomatik CI: `.github/workflows/verify.yml` (kaynak testleri + Windows Job Object +
   gerçek `--onedir` EXE + sentetik kaynak→arama→PDF vurgusu→yedek/geri yükleme).
-- `packaging/wheel_evidence.py` kurulu runtime kapanışını ve Windows wheel adaylarının SHA-256, NOTICE yolları ve paketlenmiş native byte eşleşmelerini kaydeder; **ticari lisans izni üretmez**.
+- `packaging/wheel_evidence.py` kurulu runtime kapanışını ve native byte eşleşmelerini kaydeder. `packaging/wheelhouse_stage.py` Windows CI'da indirilen exact-version wheel'leri **SHA-256 ile kilitler**, aynı wheelhouse'dan indekssiz runtime yeniden kurulumu zorlar ve `THIRD_PARTY_NOTICES/` dizinine wheel içindeki lisans/NOTICE metinlerini kontrollü çıkarır. Bu işlem **ticari lisans izni üretmez**; hash listesi her CI çalışmasında oluşur, kalıcı upstream attestation değildir.
 - `packaging/release_inventory.py` paketlenen dosyaların SHA-256 ve native listesini
   raporlar, **hak doğrulaması yapmaz**.
 - `docs/G09_IMPLEMENTATION_TR.md` tamamlanan işler, kalan kaynak/hukuk/Windows
@@ -76,6 +76,8 @@ py -3.13 -m pip install pyinstaller==6.22.3
 py -3.13 -m PyInstaller --noconfirm --clean --onedir --windowed --name LocalKnowledge --collect-all pypdfium2 --collect-all pdfplumber --collect-all pdfminer launcher.py
 py -3.13 packaging/windows_probe.py dist/LocalKnowledge/LocalKnowledge.exe evidence/windows_portable_probe.json
 py -3.13 packaging/release_inventory.py dist/LocalKnowledge evidence/native_file_inventory.json
+# G09 CI ayrıca runtime_wheel_pins.txt ve runtime_wheel_hashes.txt üretir, wheelhouse'dan yeniden kurar,
+# dist/LocalKnowledge/THIRD_PARTY_NOTICES/ dosyalarını çıkarır ve native byte eşleşmesini kaydeder.
 ```
 
 > Görseller, lisanssız model ağırlıkları, gerçek müşteri belgeleri ve kurumsal
