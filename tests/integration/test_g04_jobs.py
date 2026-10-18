@@ -139,7 +139,7 @@ class G04Formats(unittest.TestCase):
         self.assertTrue(worker.run_one())
         with connect(self.svc.db_path) as conn:
             j=conn.execute('SELECT * FROM index_jobs').fetchone()
-            self.assertEqual(j['status'],'COMPLETED')
+            self.assertEqual(j['status'],'COMPLETED', (j['status'], j['error_code'], j['attempt'], j['processed_units'], j['total_units']))
             units=conn.execute('SELECT * FROM extracted_spans ORDER BY unit_number').fetchall()
             self.assertEqual(units[0]['unit_kind'],expected_unit)
             self.assertIn(expected_text,units[0]['original_text'])

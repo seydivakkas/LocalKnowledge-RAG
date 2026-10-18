@@ -10,6 +10,18 @@ import tempfile
 import threading
 import time
 from .queue import JobQueue,Job
+
+
+def parser_error_code(progress: Path) -> str:
+    """Return a bounded non-sensitive error class; never expose source text/paths."""
+    try:
+        payload = json.loads(progress.read_text(encoding='utf-8'))
+        name = payload.get('error_class', '')
+        if isinstance(name, str) and name.isascii() and name.isidentifier() and 1 <= len(name) <= 48:
+            return 'PARSER_' + name.upper()
+    except (OSError, ValueError, TypeError, AttributeError):
+        pass
+    return 'PARSER_FAILURE'
 from ..storage.db import connect
 
 class Runner:
@@ -108,7 +120,7 @@ class Runner:
                     self.queue.state(job.id,'CANCELLED' if cancelled else 'INTERRUPTED','USER_CANCELLED' if cancelled else 'APPLICATION_STOP')
                     return
                 if proc.returncode!=0 or not result.exists():
-                    self.queue.state(job.id,'FAILED','PARSER_FAILURE')
+                    self.queue.state(job.id,'FAILED',parser_error_code(progress))
                     return
                 if result.stat().st_size>24*1024*1024:
                     self.queue.state(job.id,'FAILED','OUTPUT_LIMIT');return

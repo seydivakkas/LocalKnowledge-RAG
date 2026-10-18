@@ -91,8 +91,14 @@ def main():
         result=read_source(Path(src),kind,Path(progress))
         atomic_json(Path(out),{'spans':result})
         return 0
-    except BaseException:
-        # Never print extracted customer content to shared logs.
+    except BaseException as exc:
+        # Record only the safe exception class, never message or traceback containing customer data.
+        name = type(exc).__name__
+        name = name if name.isascii() and name.isidentifier() and len(name) <= 48 else 'UnknownError'
+        try:
+            atomic_json(Path(progress), {'units': 0, 'error_class': name})
+        except (OSError, ValueError, TypeError):
+            pass
         return 3
 
 if __name__=='__main__':sys.exit(main())
