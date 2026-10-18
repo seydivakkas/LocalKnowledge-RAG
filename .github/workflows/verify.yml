@@ -16,7 +16,9 @@ jobs:
           python-version: '3.13'
           cache: pip
       - name: Install regression dependencies
-        run: python -m pip install -e '.[test]'
+        run: |
+          python -m pip install -e '.[test]'
+          python -m pip install packaging==25.0
       - name: Source and regression tests
         env:
           PYTHONPATH: src
@@ -32,7 +34,7 @@ jobs:
       - name: Install runtime/test/build dependencies
         run: |
           python -m pip install -e ".[test]"
-          python -m pip install pyinstaller==6.22.3
+          python -m pip install pyinstaller==6.22.3 packaging==25.0
       - name: Test Windows suspended Job and extraction regressions
         run: python -m unittest discover -s tests -v
       - name: Build onedir offline candidate
@@ -42,6 +44,12 @@ jobs:
         run: python packaging/windows_probe.py dist/LocalKnowledge/LocalKnowledge.exe evidence/windows_portable_probe.json
       - name: Native manifest and license inventory (HOLD)
         run: python packaging/release_inventory.py dist/LocalKnowledge evidence/native_file_inventory.json
+      - name: Resolve exact installed runtime dependency closure
+        run: python packaging/wheel_evidence.py plan pyproject.toml evidence/runtime_wheel_pins.txt
+      - name: Download matching Windows wheel candidates for provenance
+        run: python -m pip download --only-binary=:all: --no-deps --dest "${{ runner.temp }}/lk-runtime-wheels" -r evidence/runtime_wheel_pins.txt
+      - name: Audit wheel SHA, native byte matches and license notice paths
+        run: python packaging/wheel_evidence.py audit "${{ runner.temp }}/lk-runtime-wheels" evidence/runtime_wheel_pins.txt evidence/native_file_inventory.json evidence/runtime_wheel_provenance.json
       - name: Fail closed if AGPL-only dev packages are bundled
         shell: pwsh
         run: |
