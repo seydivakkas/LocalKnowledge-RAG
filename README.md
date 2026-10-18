@@ -2,7 +2,7 @@
 
 **Offline-first Windows öncelikli yerel belge kütüphanesi ve kaynaklı arama.** G00–G07 kaynak kodu üzerine G08 yedekleme/kurtarma, izole PDF worker Windows hazırlığı ve bağımsız PDF geometri testleri eklenmiştir.
 
-**Durum:** Linux Xvfb otomatik regresyon **95 test / 94 PASS / 1 Windows-only SKIP**. Kaynak Windows müşteri kabulü, PDFium native lisans/REDIST ve ticari dağıtım **HOLD**.
+**Durum:** G09 Linux + Windows otomatik mühendislik CI başarılı ([kanıt](https://github.com/seydivakkas/LocalKnowledge-RAG/actions/runs/39075582047)); gerçek Windows son kullanıcı kabulü, PDFium/native lisans/REDIST ve ticari dağıtım **HOLD**. Önceki G08 regresyonu: 95 test / 94 PASS / 1 Windows-only SKIP.
 
 ## Çalışan modüller
 
@@ -59,6 +59,7 @@ uygulama içi özel worker rotasına yönlendirilir; hiçbir durumda `LocalKnowl
 
 - Windows otomatik CI: `.github/workflows/verify.yml` (kaynak testleri + Windows Job Object +
   gerçek `--onedir` EXE + sentetik kaynak→arama→PDF vurgusu→yedek/geri yükleme).
+- `packaging/wheel_evidence.py` kurulu runtime kapanışını ve Windows wheel adaylarının SHA-256, NOTICE yolları ve paketlenmiş native byte eşleşmelerini kaydeder; **ticari lisans izni üretmez**.
 - `packaging/release_inventory.py` paketlenen dosyaların SHA-256 ve native listesini
   raporlar, **hak doğrulaması yapmaz**.
 - `docs/G09_IMPLEMENTATION_TR.md` tamamlanan işler, kalan kaynak/hukuk/Windows
