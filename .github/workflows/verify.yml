@@ -47,7 +47,8 @@ jobs:
       - name: Resolve exact installed runtime dependency closure
         run: python packaging/wheel_evidence.py plan pyproject.toml evidence/runtime_wheel_pins.txt
       - name: Download matching Windows wheel candidates for provenance
-        run: python -m pip download --only-binary=:all: --no-deps --dest "${{ runner.temp }}/lk-runtime-wheels" -r evidence/runtime_wheel_pins.txt
+        run: |
+          python -m pip download --only-binary=:all: --no-deps --dest "${{ runner.temp }}/lk-runtime-wheels" -r evidence/runtime_wheel_pins.txt
       - name: Audit wheel SHA, native byte matches and license notice paths
         run: python packaging/wheel_evidence.py audit "${{ runner.temp }}/lk-runtime-wheels" evidence/runtime_wheel_pins.txt evidence/native_file_inventory.json evidence/runtime_wheel_provenance.json
       - name: Fail closed if AGPL-only dev packages are bundled
